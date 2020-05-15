@@ -1,12 +1,11 @@
 import {WsgOptions} from 'ringcentral-unified/build/Wsg';
 import Unified from 'ringcentral-unified';
-import {TokenInfo} from 'ringcentral-unified/build/definitions';
 
 type RingCentral = {
   platform: () => {
     loginUrl: () => string;
     auth: () => {
-      data: () => TokenInfo;
+      data: () => {};
     };
   };
 };
