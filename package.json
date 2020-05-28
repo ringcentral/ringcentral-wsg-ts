@@ -1,6 +1,6 @@
 {
   "name": "ringcentral-wsg",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "RingCentral WSG SDK",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -14,6 +14,9 @@
   "dependencies": {
     "ringcentral-unified": "^0.5.3"
   },
+  "peerDependencies": {
+    "@ringcentral/sdk": "^4.2.0"
+  },
   "devDependencies": {
     "@ringcentral/sdk": "^4.2.0",
     "@types/jest": "^25.2.3",
@@ -22,7 +25,6 @@
     "gts": "^2.0.2",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
-    "ringcentral": "^3.3.0",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.3",
     "wait-for-async": "^0.5.0",
