@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest -w 1 --detectOpenHandles",
-    "prepublishOnly": "rm -rf build && tsc && gts fix && yarn test"
+    "prepublishOnly": "rm -rf build && tsc && gts fix && yarn test && mv build/src/* build/ && rmdir build/src"
   },
   "dependencies": {
     "ringcentral-unified": "^0.5.3"
