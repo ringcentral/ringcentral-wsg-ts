@@ -12,20 +12,20 @@
     "prepublishOnly": "rm -rf build && tsc && gts fix && yarn test"
   },
   "dependencies": {
-    "ringcentral-unified": "^0.4.0"
+    "ringcentral-unified": "^0.5.3"
   },
   "devDependencies": {
-    "@ringcentral/sdk": "^4.1.0",
-    "@types/jest": "^25.2.2",
-    "@types/node": "^14.0.1",
+    "@ringcentral/sdk": "^4.2.0",
+    "@types/jest": "^25.2.3",
+    "@types/node": "^14.0.5",
     "dotenv-override-true": "^6.2.0",
     "gts": "^2.0.2",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "ringcentral": "^3.3.0",
     "ts-jest": "^26.0.0",
-    "typescript": "^3.9.2",
-    "wait-for-async": "^0.3.0",
+    "typescript": "^3.9.3",
+    "wait-for-async": "^0.5.0",
     "yarn-upgrade-all": "^0.5.2"
   },
   "husky": {

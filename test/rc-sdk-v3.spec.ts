@@ -40,7 +40,11 @@ describe('WSG', () => {
       text: 'Hello world',
     });
 
-    const result = await waitFor(() => eventCount >= 1, 1000, 60);
+    const result = await waitFor({
+      condition: () => eventCount >= 1,
+      interval: 1000,
+      times: 60,
+    });
     expect(result).toBeTruthy();
     await wsg.revoke();
     await sdk.platform().logout();
