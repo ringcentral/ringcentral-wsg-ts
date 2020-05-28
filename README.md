@@ -31,8 +31,6 @@ const Wsg = require('ringcentral-wsg').default;
 
 ## Usage
 
-### Use with RingCentral SDK v3
-
 ### Use with RingCentral SDK v4
 
 ### Use with RingCentral Unified SDK
