@@ -65,9 +65,25 @@ await wsg.subscribe(
 );
 ```
 
-For more detail, please check this [test case](./test/rc-sdk-v4.spec.ts).
+For more detail, please check this [test case](./test/subscription.spec.ts).
 
 
 ### Rest API
 
+This WSG SDK is powered by [RingCentral Unified SDK](https://github.com/ringcentral/ringcentral-unified-ts).
 
+You can access the unified sdk by `wsg.unified`:
+
+```ts
+const rc = wsg.unified!;
+const extInfo = await rc.restapi().account().extension().get();
+expect(extInfo.id).toBeDefined();
+```
+
+For more detail, please check this [test case](./test/rest.spec.ts).
+
+
+## RingCentral Unified SDK
+
+[RingCentral Unified SDK](https://github.com/ringcentral/ringcentral-unified-ts) supports both WSG and HTTP Rest.
+You can use it instead of this SDK if there are no historical reasons.
