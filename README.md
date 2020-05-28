@@ -19,13 +19,13 @@ npm install ringcentral-wsg --save
 Then you should be able to import the SDK like this:
 
 ```ts
-import Wsg from 'ringcentral-wsg';
+import WSG from 'ringcentral-wsg';
 ```
 
 or
 
 ```js
-const Wsg = require('ringcentral-wsg').default;
+const WSG = require('ringcentral-wsg').default;
 ```
 
 
@@ -77,7 +77,6 @@ You can access the unified sdk by `wsg.unified`:
 ```ts
 const rc = wsg.unified!;
 const extInfo = await rc.restapi().account().extension().get();
-expect(extInfo.id).toBeDefined();
 ```
 
 For more detail, please check this [test case](./test/rest.spec.ts).
