@@ -31,11 +31,43 @@ const Wsg = require('ringcentral-wsg').default;
 
 ## Usage
 
-### Use with RingCentral SDK v4
+### Install RingCentral SDK v4
 
-### Use with RingCentral Unified SDK
+```
+yarn add @ringcentral/sdk
+```
+
+### Initialization
+
+```ts
+import {SDK} from '@ringcentral/sdk';
+import WSG from 'ringcentral-wsg';
+
+const sdk = new SDK({server, clientId, clientSecret});
+await sdk.platform().login({username, extension, password});
+const wsg = new WSG({server});
+await wsg.initWithSDK(sdk);
+```
+
+For WSG server, there are two static constants:
+
+- `WSG.sandboxServer`: `'wss://ws-api.devtest.ringcentral.com/ws'`
+- `WSG.productionServer`: `'wss://ws-api.ringcentral.com/ws'`
+
+You can also specify a different server URL if you are testing against a lab WSG environment.
+
+### Subscription
+
+```ts
+await wsg.subscribe(
+  ['/restapi/v1.0/account/~/extension/~/message-store'],
+  event => { console.log(event); }
+);
+```
+
+For more detail, please check this [test case](./test/rc-sdk-v4.spec.ts).
 
 
-## Todo
+### Rest API
 
-- Add WSG server constants
+

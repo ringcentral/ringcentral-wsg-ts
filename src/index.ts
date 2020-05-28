@@ -1,4 +1,4 @@
-import {WsgOptions} from 'ringcentral-unified/build/Wsg';
+import Wsg, {WsgOptions} from 'ringcentral-unified/build/Wsg';
 import Unified from 'ringcentral-unified';
 import RingCentral, {AuthData} from '@ringcentral/sdk';
 import {TokenInfo} from 'ringcentral-unified/build/definitions';
@@ -15,6 +15,9 @@ function authData2TokenInfo(authData: AuthData): TokenInfo {
 }
 
 export default class WSG {
+  static sandboxServer = Wsg.sandboxServer;
+  static productionServer = Wsg.productionServer;
+
   unified?: Unified;
   wsgOptions: WsgOptions;
   constructor(wsgOptions: WsgOptions) {
@@ -54,6 +57,10 @@ export default class WSG {
   }
 
   async revoke() {
-    await this.unified?.revoke();
+    await this.unified?.wsg?.revoke();
+  }
+
+  setToken(authData: AuthData): void {
+    this.unified!.token = authData2TokenInfo(authData);
   }
 }
