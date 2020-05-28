@@ -7,7 +7,7 @@ import waitFor from 'wait-for-async';
 jest.setTimeout(64000);
 
 describe('Subscription', () => {
-  test('RingCentral SDK v4', async () => {
+  test('default', async () => {
     const sdk = new SDK({
       server: process.env.RINGCENTRAL_SERVER_URL,
       clientId: process.env.RINGCENTRAL_CLIENT_ID,

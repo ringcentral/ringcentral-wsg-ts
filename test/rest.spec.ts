@@ -5,8 +5,8 @@ import WSG from '../src/index';
 
 jest.setTimeout(64000);
 
-describe('Subscription', () => {
-  test('RingCentral SDK v4', async () => {
+describe('Rest API', () => {
+  test('default', async () => {
     const sdk = new SDK({
       server: process.env.RINGCENTRAL_SERVER_URL,
       clientId: process.env.RINGCENTRAL_CLIENT_ID,

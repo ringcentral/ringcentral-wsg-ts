@@ -4,12 +4,34 @@ import RingCentral, {AuthData} from '@ringcentral/sdk';
 import {TokenInfo} from 'ringcentral-unified/build/definitions';
 import {events} from '@ringcentral/sdk/lib/platform/Platform';
 
-function authData2TokenInfo(authData: AuthData): TokenInfo {
+function authData2TokenInfo(
+  authData: AuthData | undefined
+): TokenInfo | undefined {
+  if (authData === undefined) {
+    return undefined;
+  }
   return {
     ...authData,
     expires_in: authData.expires_in ? parseInt(authData.expires_in) : undefined,
     refresh_token_expires_in: authData.refresh_token_expires_in
       ? parseInt(authData.refresh_token_expires_in)
+      : undefined,
+  };
+}
+
+function tokenInfo2AuthData(
+  tokenInfo: TokenInfo | undefined
+): AuthData | undefined {
+  if (tokenInfo === undefined) {
+    return undefined;
+  }
+  return {
+    ...tokenInfo,
+    expires_in: tokenInfo.expires_in
+      ? tokenInfo.expires_in.toString()
+      : undefined,
+    refresh_token_expires_in: tokenInfo.refresh_token_expires_in
+      ? tokenInfo.refresh_token_expires_in.toString()
       : undefined,
   };
 }
@@ -38,14 +60,10 @@ export default class WSG {
       this.wsgOptions
     );
     rc.platform().on(events.loginSuccess, async () => {
-      this.unified!.token = authData2TokenInfo(
-        await rc.platform().auth().data()
-      );
+      this.token = await rc.platform().auth().data();
     });
     rc.platform().on(events.refreshSuccess, async () => {
-      this.unified!.token = authData2TokenInfo(
-        await rc.platform().auth().data()
-      );
+      this.token = await rc.platform().auth().data();
     });
     rc.platform().on(events.logoutSuccess, async () => {
       await this.revoke();
@@ -60,7 +78,10 @@ export default class WSG {
     await this.unified?.wsg?.revoke();
   }
 
-  setToken(authData: AuthData): void {
+  get token(): AuthData | undefined {
+    return tokenInfo2AuthData(this.unified?.token);
+  }
+  set token(authData: AuthData | undefined) {
     this.unified!.token = authData2TokenInfo(authData);
   }
 }
