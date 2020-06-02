@@ -1,6 +1,6 @@
 {
   "name": "ringcentral-wsg",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "RingCentral WSG SDK",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -12,7 +12,7 @@
     "prepublishOnly": "rm -rf build && tsc && gts fix && yarn test && mv build/src/* build/ && rmdir build/src"
   },
   "dependencies": {
-    "ringcentral-unified": "^0.5.4"
+    "ringcentral-unified": "^0.5.5"
   },
   "peerDependencies": {
     "@ringcentral/sdk": "^4.3.0"
