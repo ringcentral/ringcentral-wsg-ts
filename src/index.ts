@@ -4,38 +4,6 @@ import RingCentral, {AuthData} from '@ringcentral/sdk';
 import {TokenInfo} from 'ringcentral-unified/build/definitions';
 import {events} from '@ringcentral/sdk/lib/platform/Platform';
 
-function authData2TokenInfo(
-  authData: AuthData | undefined
-): TokenInfo | undefined {
-  if (authData === undefined) {
-    return undefined;
-  }
-  return {
-    ...authData,
-    expires_in: authData.expires_in ? parseInt(authData.expires_in) : undefined,
-    refresh_token_expires_in: authData.refresh_token_expires_in
-      ? parseInt(authData.refresh_token_expires_in)
-      : undefined,
-  };
-}
-
-function tokenInfo2AuthData(
-  tokenInfo: TokenInfo | undefined
-): AuthData | undefined {
-  if (tokenInfo === undefined) {
-    return undefined;
-  }
-  return {
-    ...tokenInfo,
-    expires_in: tokenInfo.expires_in
-      ? tokenInfo.expires_in.toString()
-      : undefined,
-    refresh_token_expires_in: tokenInfo.refresh_token_expires_in
-      ? tokenInfo.refresh_token_expires_in.toString()
-      : undefined,
-  };
-}
-
 export default class WSG {
   static sandboxServer = Wsg.sandboxServer;
   static productionServer = Wsg.productionServer;
@@ -55,7 +23,7 @@ export default class WSG {
     this.unified = new Unified(
       {
         server,
-        token: authData2TokenInfo(authData),
+        token: authData as TokenInfo,
       },
       this.wsgOptions
     );
@@ -79,9 +47,9 @@ export default class WSG {
   }
 
   get token(): AuthData | undefined {
-    return tokenInfo2AuthData(this.unified?.token);
+    return this.unified?.token as AuthData;
   }
   set token(authData: AuthData | undefined) {
-    this.unified!.token = authData2TokenInfo(authData);
+    this.unified!.token = authData as TokenInfo;
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "ringcentral-wsg",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "RingCentral WSG SDK",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -12,20 +12,20 @@
     "prepublishOnly": "rm -rf build && tsc && gts fix && yarn test && mv build/src/* build/ && rmdir build/src"
   },
   "dependencies": {
-    "ringcentral-unified": "^0.5.3"
+    "ringcentral-unified": "^0.5.4"
   },
   "peerDependencies": {
-    "@ringcentral/sdk": "^4.2.0"
+    "@ringcentral/sdk": "^4.3.0"
   },
   "devDependencies": {
-    "@ringcentral/sdk": "^4.2.0",
+    "@ringcentral/sdk": "^4.3.0",
     "@types/jest": "^25.2.3",
-    "@types/node": "^14.0.5",
+    "@types/node": "^14.0.9",
     "dotenv-override-true": "^6.2.0",
     "gts": "^2.0.2",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
-    "ts-jest": "^26.0.0",
+    "ts-jest": "^26.1.0",
     "typescript": "^3.9.3",
     "wait-for-async": "^0.5.0",
     "yarn-upgrade-all": "^0.5.2"
