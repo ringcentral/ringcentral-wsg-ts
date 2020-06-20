@@ -12,6 +12,7 @@
     "prepublishOnly": "rm -rf build && tsc && gts fix && yarn test && mv build/src/* build/ && rmdir build/src"
   },
   "dependencies": {
+    "@types/ws": "^7.2.5",
     "http-status-codes": "^1.4.0",
     "hyperid": "^2.0.5",
     "isomorphic-ws": "^4.0.1",
