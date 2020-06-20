@@ -19,10 +19,9 @@ describe('Subscription', () => {
       password: process.env.RINGCENTRAL_PASSWORD,
     });
 
-    const wsg = new WSG({
+    const wsg = new WSG(sdk, {
       server: process.env.RINGCENTRAL_WSG_SERVER_URL!,
     });
-    await wsg.initWithSDK(sdk);
 
     let eventCount = 0;
     await wsg.subscribe(
@@ -33,11 +32,17 @@ describe('Subscription', () => {
       }
     );
 
-    await sdk.platform().post('/restapi/v1.0/account/~/extension/~/sms', {
-      from: {phoneNumber: process.env.RINGCENTRAL_USERNAME},
-      to: [{phoneNumber: process.env.RINGCENTRAL_RECEIVER}],
-      text: 'Hello world',
-    });
+    // send a sms to trigger an event
+    await wsg.rc
+      .restapi()
+      .account()
+      .extension()
+      .sms()
+      .post({
+        from: {phoneNumber: process.env.RINGCENTRAL_USERNAME},
+        to: [{phoneNumber: process.env.RINGCENTRAL_RECEIVER}],
+        text: 'Hello world',
+      });
 
     const result = await waitFor({
       condition: () => eventCount >= 1,
@@ -45,6 +50,7 @@ describe('Subscription', () => {
       times: 60,
     });
     expect(result).toBeTruthy();
+
     await wsg.revoke();
     await sdk.platform().logout();
   });

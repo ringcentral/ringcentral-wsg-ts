@@ -4,28 +4,28 @@
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
 
 
+## How does it work?
+
+This SDK is powered by [RingCentral Extensible SDK](https://github.com/ringcentral/ringcentral-extensible).
+RingCentral Extensible SDK has lots of extensions which could be combined to do various things.
+The following two extensions are used:
+
+- [RingCentral Extension](https://github.com/ringcentral/ringcentral-extensible/tree/master/src/extensions/ringCentral)
+- [WebSocket Extension](https://github.com/ringcentral/ringcentral-extensible/tree/master/src/extensions/webSocket)
+
+Instead of using this SDK, it is recommended to [use RingCentral Extensible SDK directly](https://github.com/ringcentral/ringcentral-extensible/blob/master/test/multiple_extensions.spec.ts).
+
+
 ## Installation
 
 ```
 yarn add ringcentral-wsg
 ```
 
-or
-
-```
-npm install ringcentral-wsg --save
-```
-
 Then you should be able to import the SDK like this:
 
 ```ts
 import WSG from 'ringcentral-wsg';
-```
-
-or
-
-```js
-const WSG = require('ringcentral-wsg').default;
 ```
 
 
@@ -45,11 +45,13 @@ import WSG from 'ringcentral-wsg';
 
 const sdk = new SDK({server, clientId, clientSecret});
 await sdk.platform().login({username, extension, password});
-const wsg = new WSG({server});
-await wsg.initWithSDK(sdk);
+const wsg = new WSG(sdk, {
+  server: wsgServer,
+  restOverWebSocket: true, // optional, default value: false
+});
 ```
 
-For WSG server, there are two static constants:
+For `wsgServer`, there are two static constants:
 
 - `WSG.sandboxServer`: `'wss://ws-api.devtest.ringcentral.com/ws'`
 - `WSG.productionServer`: `'wss://ws-api.ringcentral.com/ws'`
@@ -70,19 +72,12 @@ For more detail, please check this [test case](./test/subscription.spec.ts).
 
 ### Rest API
 
-This WSG SDK is powered by [RingCentral Unified SDK](https://github.com/ringcentral/ringcentral-unified-ts).
+This WSG SDK is powered by [RingCentral Extensible SDK](https://github.com/ringcentral/ringcentral-extensible).
 
-You can access the unified sdk by `wsg.unified`:
+You can access the extensible sdk by `wsg.rc`:
 
 ```ts
-const rc = wsg.unified!;
-const extInfo = await rc.restapi().account().extension().get();
+const extInfo = await wsg.rc.restapi().account().extension().get();
 ```
 
 For more detail, please check this [test case](./test/rest.spec.ts).
-
-
-## RingCentral Unified SDK
-
-[RingCentral Unified SDK](https://github.com/ringcentral/ringcentral-unified-ts) supports both WSG and HTTP Rest.
-You can use it instead of this SDK if there are no historical reasons.

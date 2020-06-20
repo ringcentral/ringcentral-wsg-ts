@@ -18,15 +18,13 @@ describe('Rest API', () => {
       password: process.env.RINGCENTRAL_PASSWORD,
     });
 
-    const wsg = new WSG({
+    const wsg = new WSG(sdk, {
       server: process.env.RINGCENTRAL_WSG_SERVER_URL!,
+      restOverWebSocket: true,
     });
-    await wsg.initWithSDK(sdk);
 
-    // This SDK is powered by RingCentral Unified SDK, you can access `unified`
-    const rc = wsg.unified!;
     // You can invoke Rest API with unified
-    const extInfo = await rc.restapi().account().extension().get();
+    const extInfo = await wsg.rc.restapi().account().extension().get();
     expect(extInfo.id).toBeDefined();
 
     await wsg.revoke();
