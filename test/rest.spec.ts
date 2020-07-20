@@ -19,9 +19,9 @@ describe('Rest API', () => {
     });
 
     const wsg = new WSG(sdk, {
-      server: process.env.RINGCENTRAL_WSG_SERVER_URL!,
       restOverWebSocket: true,
     });
+    await wsg.init();
 
     // You can invoke Rest API with unified
     const extInfo = await wsg.rc.restapi().account().extension().get();

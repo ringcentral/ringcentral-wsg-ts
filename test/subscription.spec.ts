@@ -19,9 +19,8 @@ describe('Subscription', () => {
       password: process.env.RINGCENTRAL_PASSWORD,
     });
 
-    const wsg = new WSG(sdk, {
-      server: process.env.RINGCENTRAL_WSG_SERVER_URL!,
-    });
+    const wsg = new WSG(sdk);
+    await wsg.init();
 
     let eventCount = 0;
     await wsg.subscribe(

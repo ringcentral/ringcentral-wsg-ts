@@ -1,16 +1,21 @@
 import SDK from '@ringcentral/sdk';
-import RingCentral from 'ringcentral-extensible';
-import RingCentralExtension from 'ringcentral-extensible/build/extensions/ringCentral';
-import WebSocketExtension, {
-  WebSocketOptions,
-} from 'ringcentral-extensible/build/extensions/webSocket';
+import RingCentral from '@rc-ex/core';
+import RcSdkExtension from '@rc-ex/rcsdk';
+import WebSocketExtension from '@rc-ex/ws';
+import {WebSocketOptions} from '@rc-ex/ws/lib/types';
 
 export default class WSG extends WebSocketExtension {
-  constructor(sdk: SDK, options: WebSocketOptions) {
+  sdk: SDK;
+
+  constructor(sdk: SDK, options?: WebSocketOptions) {
     super(options);
+    this.sdk = sdk;
+  }
+
+  async init() {
     const rc = new RingCentral();
-    const ringCentralExtension = new RingCentralExtension(sdk);
-    rc.installExtension(ringCentralExtension);
-    rc.installExtension(this);
+    const rcSdkExtension = new RcSdkExtension(this.sdk);
+    await rc.installExtension(rcSdkExtension);
+    await rc.installExtension(this);
   }
 }

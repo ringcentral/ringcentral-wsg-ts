@@ -10,10 +10,10 @@ This SDK is powered by [RingCentral Extensible SDK](https://github.com/ringcentr
 RingCentral Extensible SDK has lots of extensions which could be combined to do various things.
 The following two extensions are used:
 
-- [RingCentral Extension](https://github.com/ringcentral/ringcentral-extensible/tree/master/src/extensions/ringCentral)
-- [WebSocket Extension](https://github.com/ringcentral/ringcentral-extensible/tree/master/src/extensions/webSocket)
+- [RingCentral SDK Extension](https://github.com/ringcentral/ringcentral-extensible/tree/master/packages/extensions/rcsdk)
+- [WebSocket Extension](https://github.com/ringcentral/ringcentral-extensible/tree/master/packages/extensions/ws)
 
-Instead of using this SDK, it is recommended to [use RingCentral Extensible SDK directly](https://github.com/ringcentral/ringcentral-extensible/blob/master/test/multiple_extensions.spec.ts).
+**Instead of using this SDK, it is recommended to [use RingCentral Extensible SDK directly](https://github.com/ringcentral/ringcentral-extensible/blob/master/test/multiple-extensions.spec.ts)**.
 
 
 ## Installation
@@ -46,17 +46,11 @@ import WSG from 'ringcentral-wsg';
 const sdk = new SDK({server, clientId, clientSecret});
 await sdk.platform().login({username, extension, password});
 const wsg = new WSG(sdk, {
-  server: wsgServer,
   restOverWebSocket: true, // optional, default value: false
 });
+await wsg.init(); // don't forget this!
 ```
 
-For `wsgServer`, there are two static constants:
-
-- `WSG.sandboxServer`: `'wss://ws-api.devtest.ringcentral.com/ws'`
-- `WSG.productionServer`: `'wss://ws-api.ringcentral.com/ws'`
-
-You can also specify a different server URL if you are testing against a lab WSG environment.
 
 ### Subscription
 
