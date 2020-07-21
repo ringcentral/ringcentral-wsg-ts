@@ -3,8 +3,6 @@
 import {SDK} from '@ringcentral/sdk';
 import WSG from '../src/index';
 
-jest.setTimeout(64000);
-
 describe('Rest API', () => {
   test('default', async () => {
     const sdk = new SDK({

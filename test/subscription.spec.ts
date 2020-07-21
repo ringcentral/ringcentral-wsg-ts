@@ -4,8 +4,6 @@ import {SDK} from '@ringcentral/sdk';
 import WSG from '../src/index';
 import waitFor from 'wait-for-async';
 
-jest.setTimeout(64000);
-
 describe('Subscription', () => {
   test('default', async () => {
     const sdk = new SDK({
