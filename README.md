@@ -1,6 +1,5 @@
 # RingCentral WSG SDK
 
-[![Build Status](https://travis-ci.org/ringcentral/ringcentral-wsg-ts.svg?branch=master)](https://travis-ci.org/ringcentral/ringcentral-wsg-ts)
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
 
 
