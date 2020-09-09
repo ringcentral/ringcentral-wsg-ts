@@ -47,6 +47,8 @@ const sdk = new SDK({server, clientId, clientSecret});
 await sdk.platform().login({username, extension, password});
 const wsg = new WSG(sdk, {
   restOverWebSocket: true, // optional, default value: false
+  debugMode: false; // optional, default value: false
+  autoRecover: true; // optional, default value: true
 });
 await wsg.init(); // don't forget this!
 ```
