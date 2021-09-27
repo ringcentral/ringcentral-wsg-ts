@@ -1,3 +1,8 @@
+# Deprecated
+
+Users should use [@rc-ex/ws](https://github.com/ringcentral/ringcentral-extensible/tree/master/packages/extensions/ws) instead.
+
+
 # RingCentral WSG SDK
 
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
